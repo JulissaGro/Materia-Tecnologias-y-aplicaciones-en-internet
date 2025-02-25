@@ -1,0 +1,56 @@
+.todo-list {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.todo__state {
+  margin-right: 15px;
+}
+
+.todo__state:checked + .todo__text {
+  text-decoration: line-through;
+  color: #2196f3;
+}
+
+.file-input {
+  display: flex;
+}
+
+.text {
+  width: 80%;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.button {
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+
+.button.pink {
+  background-color: #e91e63;
+  color: white;
+}
+
+.button.pink:disabled {
+  background-color: #ccc;
+}
+
+.button.blue {
+  background-color: #2196f3;
+}
+
+.button.blue:hover {
+  background-color: #1976d2;
+}
