@@ -1,7 +1,6 @@
 {
     "host": "localhost",
-    "user": "node.js",
-    "password": "",
+    "user": "root",
     "database":"practica04",
     "port":"3306"
 }

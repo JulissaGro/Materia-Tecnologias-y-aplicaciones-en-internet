@@ -41,6 +41,20 @@ app.get("/json", (req, res)=>{
     res.json(resObj);
 });
 
+//Prueba para verificar el endpoint
+app.get("/test-db", async (req, res) =>{
+    try{
+        //Objeto de tipo conexión
+        //Crea la conexión a partir de los parámetros que pusimos en dbConfig
+        const db = await mysql.createConnection(dbConfig);
+        res.send("Conexión a base de datos exitosa");
+        await db.end(); //Esperar a que la conexión termine
+    }catch(ex){
+        console.error(ex); //Ver la excepción en consola
+        res.status(500).send("Error de base de datos" + ex.message);
+    }
+});
+
 routerApi(app);
 
 app.listen(PORT, () =>{
