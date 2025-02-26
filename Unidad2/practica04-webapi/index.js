@@ -1,5 +1,8 @@
 //Cada que hacemos un cambio hay que pararlo y volverlo a cargar
 /**
+ * Para usar bases de datos, en este caso mysql hay que instalar el siguiente
+ *  paquete: npm i mysql2
+ * 
  * Es posible hacer algo parecido, instalaremos una dependencia
  *  npm i nodemon -D
  *  -D porque es un paquete de desarrollo, no lo necesita la aplicación
@@ -14,6 +17,10 @@
  *  Nodemone se encargará de reiniciar el servicio automáticamente al guardar
 */
 const express = require("express");
+//Base de datos
+const mysql = require("mysql2/promise");
+const dbConfig = require("./dbConfig.json");
+
 const routerApi = require("./routes");//No le ponemos "/index" porque ya lo supone
 const app = express();
 const PORT = 3001;
