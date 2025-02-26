@@ -20,8 +20,11 @@ const express = require("express");
 //Base de datos
 const mysql = require("mysql2/promise");
 const dbConfig = require("./dbConfig.json");
+//Servicio para la conexión a base de datos y retorno de todas las tareas
+const tareasService = require("./services/TareasService.js");
 
 const routerApi = require("./routes");//No le ponemos "/index" porque ya lo supone
+const TareasService = require("./services/TareasService.js");
 const app = express();
 const PORT = 3001;
 
@@ -53,6 +56,23 @@ app.get("/test-db", async (req, res) =>{
         console.error(ex); //Ver la excepción en consola
         res.status(500).send("Error de base de datos" + ex.message);
     }
+});
+
+//Otro endpoint que regresa todos los registros de tareas
+//Preferentemente no tener la conexión a la base de datos en los endpoints
+app.get("/tareas", async (req, res) =>{
+    /**Por eso no ponemos esto aquí
+     *const db = await mysql.createConnection(dbConfig);
+     *--Nos regresa tanto rows como metadata, por lo que le indicamos
+     *-- que solo queremos obtener las rows.
+     *const [rows] = await db.execute("SELECT * FROM tareas");
+     *await db.end();
+     *res.json(rows);
+    */
+
+    //Solo llamamos al servicio
+    const tareasService = new TareasService();
+    res.json(await tareasService.obtenerTodas());
 });
 
 routerApi(app);
