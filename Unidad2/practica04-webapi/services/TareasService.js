@@ -32,7 +32,33 @@ class TareasService{
         //const db = await mysql.createConnection(dbConfig);
         const [rows] = await db.execute("SELECT * FROM tareas");
         //await db.end(); //Ir cerrando las conexiones puede crear un cuello de botella
-        return rows;
+        /**
+         * Haremos el cambio a retornar con map, para poder manipular los datos a nuestro
+         *  gusto y no dejarlos como lo retorna la base de datos.
+         */ 
+        return rows.map(r=>{
+            //El signo de interrogación(?) es un protector de NULL
+            //Si encuentra null no seguirá con el proceso y saltará al siguiente
+            return{
+                id: r.id,
+                descripcion: r.descripcion,
+                fechaRegistro: r.fecha_registro.toLocaleString("es-Mx"),
+                fechaCaduca: r.fecha_caduca?.toLocaleString("es-Mx"),
+                concluido: r.concluido != 0,
+            }
+        });
+    }
+
+    //Guardar tareas (usada en el router.tareas)
+    async guardarNuevaTarea(tarea){
+        const sql = 
+            "INSERT INTO tareas" +
+            "(descripcion, fecha_registro, fecha_caduca, concluido)" +
+            " VALUES(?,?,?,?)";
+
+        const p = [tarea.descripcion, tarea.fechaRegistro, tarea.fechaCaduca, 0];
+        const [r] = await db.execute(sql, p);
+        return r.insertId; //Como es un autoincrement podemos obtener el id del INSERT
     }
 }
 
