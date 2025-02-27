@@ -19,7 +19,6 @@
 const express = require("express");
 //Base de datos
 const mysql = require("mysql2/promise");
-const dbConfig = require("./dbConfig.json");
 //Servicio para la conexión a base de datos y retorno de todas las tareas
 const tareasService = require("./services/TareasService.js");
 
