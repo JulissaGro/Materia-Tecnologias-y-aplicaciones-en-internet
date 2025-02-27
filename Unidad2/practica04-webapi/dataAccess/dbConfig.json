@@ -1,0 +1,9 @@
+{
+    "host": "localhost",
+    "user": "root",
+    "database": "practica04",
+    "port": "3306",
+    "waitForConnections": true,
+    "connectionLimit": 64,
+    "queueLimit": 0
+}

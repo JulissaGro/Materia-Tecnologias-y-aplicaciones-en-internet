@@ -1,6 +1,0 @@
-{
-    "host": "localhost",
-    "user": "root",
-    "database":"practica04",
-    "port":"3306"
-}

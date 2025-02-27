@@ -17,13 +17,14 @@
  *  Nodemone se encargará de reiniciar el servicio automáticamente al guardar
 */
 const express = require("express");
-//Base de datos
-const mysql = require("mysql2/promise");
+//Base de datos(Ya no se necesita con el pool)
+//const mysql = require("mysql2/promise");
 //Servicio para la conexión a base de datos y retorno de todas las tareas
-const tareasService = require("./services/TareasService.js");
+//const tareasService = require("./services/TareasService.js");
 
 const routerApi = require("./routes");//No le ponemos "/index" porque ya lo supone
-const TareasService = require("./services/TareasService.js");
+//No necesario por el pool
+//const TareasService = require("./services/TareasService.js");
 const app = express();
 const PORT = 3001;
 
@@ -43,8 +44,8 @@ app.get("/json", (req, res)=>{
     res.json(resObj);
 });
 
-//Prueba para verificar el endpoint
-app.get("/test-db", async (req, res) =>{
+//Prueba para verificar el endpoint (No necesario con el pool)
+/* app.get("/test-db", async (req, res) =>{
     try{
         //Objeto de tipo conexión
         //Crea la conexión a partir de los parámetros que pusimos en dbConfig
@@ -55,11 +56,12 @@ app.get("/test-db", async (req, res) =>{
         console.error(ex); //Ver la excepción en consola
         res.status(500).send("Error de base de datos" + ex.message);
     }
-});
+}); */
 
+//Pasado a otro lado por el pool
 //Otro endpoint que regresa todos los registros de tareas
 //Preferentemente no tener la conexión a la base de datos en los endpoints
-app.get("/tareas", async (req, res) =>{
+//app.get("/tareas", async (req, res) =>{
     /**Por eso no ponemos esto aquí
      *const db = await mysql.createConnection(dbConfig);
      *--Nos regresa tanto rows como metadata, por lo que le indicamos
@@ -70,9 +72,10 @@ app.get("/tareas", async (req, res) =>{
     */
 
     //Solo llamamos al servicio
-    const tareasService = new TareasService();
-    res.json(await tareasService.obtenerTodas());
-});
+    //const tareasService = new TareasService();
+    //res.json(await tareasService.obtenerTodas());
+//}); 
+
 
 routerApi(app);
 
