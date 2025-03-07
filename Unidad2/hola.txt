@@ -1,0 +1,65 @@
+Crear practica04-client-app con npm create vite@latest
+Crear en components TareaItem.jsx (Forma para mostrar el item)
+    export default function TareaItem({tarea}){
+        return(
+            <div>
+                <h3>(tarea.descripcion)</h3>
+                <span>Caduca <strong>(tarea.fechaCaduca || "[SIN CADUCIDAD]")</strong></span>
+            </div>
+        );
+    }
+
+Dentro de App.jsx
+    en function App
+
+    function App(){
+        const [tareas, setTareas] = useState([]);
+        const [descripcionTarea, setDescripcionTarea] = useState([]);
+
+        const obtenerTareas = async () =>{
+            //A partir de una llamada ajax
+            //Este endpoint devuleve un json
+            const response = await fetch("http://127.0.0.1:3001/api/v1/tareas");
+            //Deserializa el json
+            const resDatos = await response.json();
+
+            setTareas(resDatos);
+        };
+
+        //Guardar una nueva tarea
+        const guardarNuevaTarea = async() =>{
+            //Hacer una petición POST con  los datos que deseamos
+            //Como nuestro enpoint recibe un payload json le mandamos eso en el body
+            const response = await fetch(
+                "http://127.0.0.1:3001/api/v1/tareas",
+                {
+                    method: "POST,
+                    body: JSON.stringfy({
+                        descripcion: descripcionTarea,
+                        fechaRegistro: "2025-02-28T10:25:00",
+                        fechaCaduca: null
+                    }),
+                    headers: {"Content-Type": "application/json"}
+                }
+            );
+            
+            //Regresar una respuesta siempre
+            const resData = await response.json();
+            alert{`${resData.message} || Id Tarea: ${resData.idTarea}`};
+            await obtenerTareas();
+        };
+    }
+
+    Poner en donde se renderiza toda la página
+    <--renderizar todas las tareas-->
+    <br/>
+    <button onClic={()=> obtenerTareas()}>
+        Consultar tareas
+    </button>
+    <--Registrar tarea-->
+    <input value = {descripcionTarea} onChange = {(e) => setDescripcionTarea(e.target.value)}/>
+    <button onClick={() =>guardarNuevaTarea()}>
+        Agregar Nueva Tarea
+    </button>
+    <--El json retornado se renderiza en esta parte-->
+    {tareas.map(tarea => <TareaItem key = {tarea.id} tarea = {tarea} />)} 

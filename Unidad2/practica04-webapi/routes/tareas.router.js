@@ -1,7 +1,19 @@
+/**
+ * Conectar back y front
+ * permite a javascript contestar a otro dominio
+ * Restricción de seguridad para evitar la inyección de cross-side exiting???
+ * npm i cors 
+ */
 //Nueva sección para el endpoint obtener todas las tareas
 const express = require("express");
+const app = express();
 const router = express.Router();
 const TareasService = require("../services/TareasService");
+
+const cors = require("cors");
+//middlewares que permiten responder a las peticiones
+app.use(cors());
+app.use(express.json);
 
 router.get("/", async (req, res)=>{
     const tareasService = new TareasService();
