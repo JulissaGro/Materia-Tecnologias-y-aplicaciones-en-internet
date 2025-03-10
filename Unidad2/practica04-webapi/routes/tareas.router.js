@@ -13,7 +13,7 @@ const TareasService = require("../services/TareasService");
 const cors = require("cors");
 //middlewares que permiten responder a las peticiones
 app.use(cors());
-app.use(express.json);
+app.use(express.json());
 
 router.get("/", async (req, res)=>{
     const tareasService = new TareasService();

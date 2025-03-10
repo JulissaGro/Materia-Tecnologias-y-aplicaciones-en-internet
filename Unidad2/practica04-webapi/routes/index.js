@@ -2,6 +2,7 @@ const express = require("express");
 const elementosRouter = require("./elementos.router");
 const productosRouter = require("./productos.router");
 const tareasRouter = require("./tareas.router");
+const accounRouter = require("./account.router");
 
 //Normalmente las rutas se agrupan según cierto contexto
 function routerApi(app) {
@@ -18,7 +19,7 @@ function routerApi(app) {
     router.use("/elementos", elementosRouter);
     router.use("/productos", productosRouter);
     router.use("/tareas", tareasRouter);
-
+    router.use("/account", accounRouter);
 }
 
 //Exportamos routerApi
