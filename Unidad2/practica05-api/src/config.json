@@ -1,0 +1,18 @@
+{
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "practica04",
+        "port": "3306",
+        "waitForConnections": true,
+        "connectionLimit": 64,
+        "queueLimit": 0
+    },
+    "accountServiceConfig": {
+        "accessTokenSecret": "AlgunaClaveMuySecreta",
+        "accessTokenExpirationSec": 300,
+        "refreshTokenExpirationDays": 1,
+        "passwordSaltWorkFactor": 12
+    }
+}
