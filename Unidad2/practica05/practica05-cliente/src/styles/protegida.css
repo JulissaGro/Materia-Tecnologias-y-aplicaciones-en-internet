@@ -1,0 +1,44 @@
+.user-profile-card {
+    max-width: 500px;
+    margin-top: 90px;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgb(28, 27, 27);
+    color: #fff;
+  }
+  
+  .user-profile-card h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .user-details p {
+    font-size: 16px;
+  }
+  
+  .user-details strong {
+    font-weight: bold;
+  }
+  .logout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4d4d; /* Color rojo para cerrar sesión */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .logout-button:hover {
+    background-color: #e60000; /* Color más oscuro cuando el mouse está sobre el botón */
+  }  
+  
